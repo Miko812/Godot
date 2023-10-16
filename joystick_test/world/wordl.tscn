@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://player/player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://joystick/joystick.tscn" type="PackedScene" id=2]
+
+[node name="wordl" type="Node"]
+
+[node name="joystick" parent="." instance=ExtResource( 2 )]
+
+[node name="player" parent="." instance=ExtResource( 1 )]
+
+[connection signal="swipe_detect" from="joystick" to="player" method="_on_joystick_swipe_detect"]
+[connection signal="swipe_end" from="joystick" to="player" method="_on_joystick_swipe_end"]
