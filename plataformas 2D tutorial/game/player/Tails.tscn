@@ -1,0 +1,121 @@
+[gd_scene load_steps=24 format=2]
+
+[ext_resource path="res://assets/personeje/animaciones/Idle/tails_Idle1.png" type="Texture" id=1]
+[ext_resource path="res://assets/personeje/animaciones/Idle/tails_Idle2.png" type="Texture" id=2]
+[ext_resource path="res://assets/personeje/animaciones/Idle/tails_Idle3.png" type="Texture" id=3]
+[ext_resource path="res://assets/personeje/animaciones/Idle/tails_Idle4.png" type="Texture" id=4]
+[ext_resource path="res://assets/personeje/animaciones/Idle/tails_Idle5.png" type="Texture" id=5]
+[ext_resource path="res://assets/personeje/animaciones/Run/tails_run2.png" type="Texture" id=6]
+[ext_resource path="res://game/player/Tails.gd" type="Script" id=7]
+[ext_resource path="res://assets/personeje/animaciones/Run/tails_run1.png" type="Texture" id=8]
+[ext_resource path="res://assets/personeje/animaciones/Run/tails_run5.png" type="Texture" id=9]
+[ext_resource path="res://assets/personeje/animaciones/Run/tails_run3.png" type="Texture" id=10]
+[ext_resource path="res://assets/personeje/animaciones/Run/tails_run4.png" type="Texture" id=11]
+[ext_resource path="res://assets/personeje/animaciones/Run/tails_run8.png" type="Texture" id=12]
+[ext_resource path="res://assets/personeje/animaciones/jump/tails_jump1.png" type="Texture" id=13]
+[ext_resource path="res://assets/personeje/animaciones/Run/tails_run7.png" type="Texture" id=14]
+[ext_resource path="res://assets/personeje/animaciones/fall/tails_fall.png" type="Texture" id=15]
+[ext_resource path="res://assets/personeje/animaciones/Run/tails_run6.png" type="Texture" id=16]
+[ext_resource path="res://assets/personeje/animaciones/jump/tails_jump2.png" type="Texture" id=17]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 9.0
+height = 12.0
+
+[sub_resource type="Animation" id=4]
+resource_name = "Fall"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 15 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "Idle"
+length = 0.9
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ ExtResource( 1 ), ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ) ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "Jump"
+length = 0.7
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ ExtResource( 13 ), ExtResource( 17 ), ExtResource( 13 ), ExtResource( 17 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ ExtResource( 1 ) ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "Run"
+length = 0.8
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ ExtResource( 8 ), ExtResource( 6 ), ExtResource( 10 ), ExtResource( 11 ), ExtResource( 9 ), ExtResource( 16 ), ExtResource( 14 ), ExtResource( 12 ) ]
+}
+
+[node name="Tails" type="KinematicBody2D"]
+script = ExtResource( 7 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 3, 1 )
+shape = SubResource( 1 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Fall = SubResource( 4 )
+anims/Idle = SubResource( 2 )
+anims/Jump = SubResource( 5 )
+anims/RESET = SubResource( 3 )
+anims/Run = SubResource( 6 )
